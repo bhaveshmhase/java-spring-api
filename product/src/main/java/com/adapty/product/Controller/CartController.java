@@ -20,28 +20,37 @@ public class CartController {
     @Autowired
     private CartImpl srvCart;
 
+    //fetching all details of Cart with product id mention in cart and total price of cart.
     @GetMapping(value ="/api/cart")
     public ArrayList findAll(){
         return srvCart.findAll();
     }
+
+    
+    //Add new cart to cart table.
     @PostMapping(value ="/api/addnewcart")
-    public String AddObjToCart(@RequestBody Cart cartObj){
-        return srvCart.AddObjToCart(cartObj);
+    public String addObjToCart(@RequestBody Cart cartObj){
+        return srvCart.addObjToCart(cartObj);
     }
-   
-    @DeleteMapping(value = "/api/delete/cartproduct/{cartItemID}")
-    public String  deleteByCartID(@PathVariable String cartItemID){
-        return srvCart.deleteByCartID(cartItemID);
+    
+    //Delete Cart object by cart item id.
+    @DeleteMapping(value = "/api/delete/cart/{cartItemID}")
+    public String  deleteCartByCartID(@PathVariable String cartItemID){
+        return srvCart.deleteCartByCartID(cartItemID);
     }
+
+     
+    //Update Cart by cart item id.
     @PutMapping(value="/api/modify/{cartItemId}")
     public Cart updateCartByItemId(@RequestBody Cart  cartItemId){
         return srvCart.updateCartByItemId(cartItemId);
     }
+
+     //delete cart object by product id.
     @DeleteMapping(value = "/api/item/{productId}")
     public String deleteCartByProductId(@PathVariable String productId){
     return srvCart.deleteCartByProductId(productId);
     }
     
-
-   
 }
+

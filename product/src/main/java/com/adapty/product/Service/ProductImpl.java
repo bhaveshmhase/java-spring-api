@@ -13,20 +13,26 @@ public class ProductImpl implements ProductInterface {
     @Autowired
     private ProductRepository repoObj;
 
+    //Fetching all details about Products.
     public List<Product> findAllProduct() {
         return repoObj.findAll();
     }
 
+    //find product by product id.
     public Optional<Product> findProductByproductId(String productId) {
         return repoObj.findById(productId);
     }
+
+    //Add new object to product table.
     public String addProduct(Product ProductObj)
     {
         repoObj.save(ProductObj);
         return "Object saved";
 
     }
-    public Product updateProductById(Product productObj){
+    
+    //Update product by producy id.
+    public Product updateProductByProductId(Product productObj){
         if(productObj.getProductId() == null){
             return productObj;
         }
@@ -47,10 +53,8 @@ public class ProductImpl implements ProductInterface {
         
     }
 
-
-
-
-    public String deleteProductById(Product productsObj){
+    //Delete product object by product id.
+    public String deleteProductByProductId(Product productsObj){
         if(productsObj.getProductId() == null) {
             return "Enter a Valid Id";
         }

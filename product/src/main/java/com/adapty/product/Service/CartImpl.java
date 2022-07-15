@@ -18,6 +18,9 @@ public class CartImpl implements CartInterface {
      CartRepository repoCart;
      @Autowired
      ProductRepository repoObj;
+    
+    
+     //fetching all details of Cart with product id mention in cart and total price of cart.
      public ArrayList findAll(){
         float totalPrice=0;
         int i=0;
@@ -35,8 +38,8 @@ public class CartImpl implements CartInterface {
 
 
 
-    
-    public String AddObjToCart(Cart cartObj){
+    //Add new cart to cart table.
+    public String addObjToCart(Cart cartObj){
         Optional<Product> a1 =repoObj.findById(cartObj.getProductId());
         if(a1.get().getProductStatus() == STATUS.ACTIVE){
             repoCart.save(cartObj);
@@ -48,12 +51,13 @@ public class CartImpl implements CartInterface {
         }
     }
 
-    public String deleteByCartID(String cartItemId){
+    //Delete Cart object by cart item id.
+    public String deleteCartByCartID(String cartItemId){
         repoCart.deleteById(cartItemId);
         return "Cart object deleted successfully";
-  
-    
-    }
+  }
+
+  //Update Cart by cart item id.
     public Cart updateCartByItemId(Cart cartItemId){
         if(cartItemId.getCartItemId() == null){
             return cartItemId;
@@ -71,6 +75,8 @@ public class CartImpl implements CartInterface {
             return repoCart.save(c1.get());
         }
     }
+
+    //delete cart object by product id.
     public String deleteCartByProductId(String productId){
         repoCart.deleteByProductId(productId);
         return "Product Id in cart deleted successfully.";

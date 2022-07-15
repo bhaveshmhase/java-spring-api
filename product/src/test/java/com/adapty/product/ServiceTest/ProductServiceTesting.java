@@ -38,7 +38,7 @@ public class ProductServiceTesting {
         assertEquals(2, prlist.size());
         verify(productRepoObj, times(1)).findAll();
     }   
-//find product list by product id
+//find product details  by product id
     @Test        
     public void findProductByproductId(){
         Product p1 = new Product("1", "oneplus", CATEGORY.ELECTRONICS ,36000, "Phone", "url/sdfsgfsdf/dfsd", STATUS.ACTIVE);
@@ -47,7 +47,7 @@ public class ProductServiceTesting {
         assertEquals(STATUS.ACTIVE,p2.get().getProductStatus());
         assertEquals(p1.getProductId(),p2.get().getProductId());
 }
-//add product to product list
+//add product object to product list
 @Test
 public void addProduct(){
     Product p1 = new Product("1", "oneplus", CATEGORY.ELECTRONICS ,36000, "Phone", "url/sdfsgfsdf/dfsd", STATUS.ACTIVE);
@@ -55,9 +55,9 @@ public void addProduct(){
     String msg=productImplObj.addProduct(p1);
     assertNotNull(p1,"Object is created");
 }
-//update product list by poduct id
+//update product object by poduct id
 @Test
-public void updateProductById(){
+public void updateProductByProductId(){
     Product p1=new Product("1", "one plus", CATEGORY.ELECTRONICS, 100000, "Its a smarphone", "ur/setimag/",STATUS.ACTIVE);
 
    p1.setProductName("tshirt");
@@ -75,12 +75,13 @@ public void updateProductById(){
     Assertions.assertThat(p1.getProductStatus()).isEqualTo(STATUS.ACTIVE);
 
 }
-//delete product by product id
+
+//delete product object by product id
 @Test
-public void deleteProductById(){
+public void deleteProductByProductId(){
     Product p1 = new Product("1", "oneplus", CATEGORY.ELECTRONICS ,36000, "Phone", "url/sdfsgfsdf/dfsd", STATUS.ACTIVE);
     when(productRepoObj.findById("1")).thenReturn(Optional.of(p1));
-    String msg=productImplObj.deleteProductById(p1);
+    String msg=productImplObj.deleteProductByProductId(p1);
     assertEquals( "Object Deleted Successfully",msg);
     }
 }

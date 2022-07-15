@@ -40,45 +40,29 @@ public class CartServiceTesting {
     @Mock 
     ProductRepository productRepoObj;
 
-    //fetch all carts
-    /@Test
-//     public void findAll(){
-//         ArrayList list = new ArrayList();
-//         Cart c1=new Cart("1", 2, "2");
-//         Product p1=new Product("2", "vivo", CATEGORY.ELECTRONICS,10000, "8GB RAM", "url/image", STATUS.ACTIVE);
-//         list.add(c1);
-//         list.add(p1);
-//         int totalPrice=(c1.getCartItemQty() * p1.getProductPrice());
-//         list.add(totalPrice);
-//         when(CartRepoObj.findAll()).thenReturn(list);
-//         assertEquals(1, list.size());
-//         verify(list,times(3)).findAll();
-       
-        
-//  } 
     
     
    
 
-
-    //Add to cart
+    //Add new cart to cart table.
     @Test
-    public void AddObjToCart(){
+    public void addObjToCart(){
     Cart c1=new Cart("1", 50, "1");
     CartRepoObj.save(c1);
     verify(CartRepoObj,times(1)).save(c1);
     }
 
-    //Delete cart by cartID
+    //Delete Cart object by cart item id.
     @Test
-    public void deleteByCartID(){
+    public void deleteCartByCartID(){
         Cart c1 = new Cart("c1", 50, "1");
         lenient().when(CartRepoObj.findById("c1")).thenReturn(Optional.of(c1));
-        String msg=CartImplObj.deleteByCartID("c1");
+        String msg=CartImplObj.deleteCartByCartID("c1");
         assertEquals("Cart object deleted successfully",msg);
         
     }
-    //Update Cart by cart
+   
+    //Update Cart by cart item id.
     @Test
     public void updateCartByItemId(){
         Cart c1=new Cart("2", 10, "2");
@@ -91,7 +75,7 @@ public class CartServiceTesting {
         Assertions.assertThat(c1.getProductId()).isEqualTo("2");
         }
 
-    //Delete By Cart By product ID
+     //delete cart object by product id.
     @Test
     public void deleteCartByProductById(){
         Cart c1 = new Cart("1", 50, "1");

@@ -21,28 +21,36 @@ public class ProductController {
     @Autowired
     private ProductImpl srv;
 
+    //Fetching all details about Products.
     @GetMapping(value ="/api/allproducts")
     public List<Product> findAllProduct(){
         return srv.findAllProduct();
     }
-    @GetMapping(value="/api/deleteproduct/{id}")
+
+    //find product by product id.
+    @GetMapping(value="/api/product/{id}")
     public Optional<Product> findProductByproductId(@PathVariable("id") String productId)
     {
         return srv.findProductByproductId(productId);
     }
-    @PostMapping(value="/api/postproduct")
+
+    //Add new product object to product  table.
+    @PostMapping(value="/api/newproduct")
     public String addProduct(@RequestBody Product ProductObj){
         return srv.addProduct(ProductObj);
     }
+
+    //Update product object by product id.
     @PutMapping(value="/api/updateproduct/{id}")
-    public Product updateProductById(@PathVariable("id") Product obj){
-        return srv.updateProductById(obj);
+    public Product updateProductByProductId(@PathVariable("id") Product obj){
+        return srv.updateProductByProductId(obj);
     }
 
+    //Delete product object by product id.
     @DeleteMapping(value = "/api/deleteproduct/{id}")
-    public String deleteProductById(@PathVariable("id") Product productObj)
+    public String deleteProductByProductId(@PathVariable("id") Product productObj)
     {
-        return srv.deleteProductById(productObj);
+        return srv.deleteProductByProductId(productObj);
     }
 
 
